@@ -57,6 +57,7 @@ public abstract class BaseWxMaServiceImpl<H, P> implements WxMaService, RequestH
   private final WxMaSecCheckService secCheckService = new WxMaSecCheckServiceImpl(this);
   private final WxMaPluginService pluginService = new WxMaPluginServiceImpl(this);
   private final WxMaExpressService expressService = new WxMaExpressServiceImpl(this);
+  private final WxMaExpressLocalService expressLocalService = new WxMaExpressLocalServiceImpl(this);
   private final WxMaSubscribeService subscribeService = new WxMaSubscribeServiceImpl(this);
   private final WxMaCloudService cloudService = new WxMaCloudServiceImpl(this);
   private final WxMaLiveService liveService = new WxMaLiveServiceImpl(this);
@@ -482,6 +483,11 @@ public abstract class BaseWxMaServiceImpl<H, P> implements WxMaService, RequestH
   @Override
   public WxMaExpressService getExpressService() {
     return this.expressService;
+  }
+
+  @Override
+  public WxMaExpressLocalService getExpressLocalService() {
+    return this.expressLocalService;
   }
 
   @Override

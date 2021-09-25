@@ -123,6 +123,65 @@ public class WxMaApiUrlConstants {
     String TEST_UPDATE_ORDER_URL = "https://api.weixin.qq.com/cgi-bin/express/business/test_update_order";
   }
 
+  public interface ExpressLocal {
+    /**
+     * 异常件退回商家商家确认收货接口
+     */
+    String ABNORMAL_CONFIRM_URL = "https://api.weixin.qq.com/cgi-bin/express/local/business/order/confirm_return";
+    /**
+     * 下配送单接口
+     */
+    String ADD_ORDER_URL = "https://api.weixin.qq.com/cgi-bin/express/local/business/order/add";
+    /**
+     * 添加小费接口
+     */
+    String ADD_TIP_URL = "https://api.weixin.qq.com/cgi-bin/express/local/business/order/addtips";
+    /**
+     * 第三方代商户发起绑定配送公司帐号的请求接口
+     */
+    String BIND_ACCOUNT_URL = "https://api.weixin.qq.com/cgi-bin/express/local/business/shop/add";
+    /**
+     * 取消配送单接口
+     */
+    String ORDER_CANCEL_URL = "https://api.weixin.qq.com/cgi-bin/express/local/business/order/cancel";
+    /**
+     * 获取支持的配送公司列表
+     */
+    String GET_ALL_DELIVERY_URL = "https://api.weixin.qq.com/cgi-bin/express/local/business/delivery/getall";
+    /**
+     * 拉去已绑定的账号
+     */
+    String GET_BIND_ACCOUNT_URL = "https://api.weixin.qq.com/cgi-bin/express/local/business/shop/get";
+    /**
+     * 拉取配送单信息
+     */
+    String GET_ORDER_URL = "https://api.weixin.qq.com/cgi-bin/express/local/business/order/get";
+    /**
+     * 模拟配送公司更新配送单状态
+     */
+    String MOCK_UPDATE_ORDER = "https://api.weixin.qq.com/cgi-bin/express/local/business/test_update_order";
+    /**
+     * 第三方代商户发起开通即时配送权限
+     */
+    String OPEN_DELIVERY_URL = "https://api.weixin.qq.com/cgi-bin/express/local/business/open";
+    /**
+     * 预下配送单接口
+     */
+    String PRE_ADD_ORDER_URL = "https://api.weixin.qq.com/cgi-bin/express/local/business/order/pre_add";
+    /**
+     * 预取消配送单接口
+     */
+    String PRE_CANCEL_ORDER_URL = "https://api.weixin.qq.com/cgi-bin/express/local/business/order/precancel";
+    /**
+     * 模拟配送公司更新配送单状态, 该接口用于测试账户下的单，将请求转发到运力测试环境
+     */
+    String REAL_MOCK_UPDATE_ORDER_URL = "https://api.weixin.qq.com/cgi-bin/express/local/business/realmock_update_order";
+    /**
+     * 重新下单
+     */
+    String RE_ORDER_URL = "https://api.weixin.qq.com/cgi-bin/express/local/business/order/readd";
+  }
+
   public interface ImgProc {
     /**
      * 二维码/条码识别

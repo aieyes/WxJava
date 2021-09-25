@@ -336,6 +336,11 @@ public interface WxMaService extends WxService {
   WxMaExpressService getExpressService();
 
   /**
+   * 获取本地的快递服务
+   */
+  WxMaExpressLocalService getExpressLocalService();
+
+  /**
    * 获取云开发接口服务对象
    *
    * @return . cloud service
