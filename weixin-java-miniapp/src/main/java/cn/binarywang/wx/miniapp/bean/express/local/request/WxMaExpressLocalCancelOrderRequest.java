@@ -24,7 +24,7 @@ public class WxMaExpressLocalCancelOrderRequest implements Serializable {
   private static final long serialVersionUID = 6304115970314913392L;
 
   @SerializedName("shopid")
-  private String shopid;
+  private String shopId;
   @SerializedName("shop_order_id")
   private String shopOrderId;
   @SerializedName("shop_no")

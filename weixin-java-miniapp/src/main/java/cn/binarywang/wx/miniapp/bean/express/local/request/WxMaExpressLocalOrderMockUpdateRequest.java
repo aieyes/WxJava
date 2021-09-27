@@ -24,7 +24,7 @@ public class WxMaExpressLocalOrderMockUpdateRequest implements Serializable {
   private static final long serialVersionUID = -3683239300148016034L;
 
   @SerializedName("shopid")
-  private String shopid;
+  private String shopId;
   @SerializedName("shop_order_id")
   private String shopOrderId;
   @SerializedName("action_time")

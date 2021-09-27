@@ -31,7 +31,7 @@ public class WxMaExpressAbnormalConfirmRequest implements Serializable {
    * 描述：由配送公司分配的appkey
    * </pre>
    */
-  @SerializedName("shop_id")
+  @SerializedName("shopid")
   private String shopId;
 
   /**

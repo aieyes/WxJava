@@ -20,6 +20,11 @@ import java.util.List;
 public interface WxMaExpressLocalService {
 
   /**
+   * 初始化
+   */
+  void init(String appKey, String appSecret);
+
+  /**
    * 获取已支持的配送公司列表接口
    * <a href="https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/immediate-delivery/by-business/immediateDelivery.getAllImmeDelivery.html">查看文档</a>
    *

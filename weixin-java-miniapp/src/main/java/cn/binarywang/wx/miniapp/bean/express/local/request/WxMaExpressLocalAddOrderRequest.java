@@ -30,8 +30,8 @@ public class WxMaExpressLocalAddOrderRequest implements Serializable {
    */
   @SerializedName("delivery_token")
   private String deliveryToken;
-  @SerializedName("shop_id")
-  private String shopid;
+  @SerializedName("shopid")
+  private String shopId;
   @SerializedName("shop_order_id")
   private String shopOrderId;
   @SerializedName("shop_no")
