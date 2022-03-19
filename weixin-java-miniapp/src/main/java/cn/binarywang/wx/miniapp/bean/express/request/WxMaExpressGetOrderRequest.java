@@ -59,6 +59,15 @@ public class WxMaExpressGetOrderRequest implements Serializable {
   @SerializedName("waybill_id")
   private String waybillId;
 
+  /**
+   * 获取打印面单类型【1：一联单，0：二联单】，默认获取二联单
+   * <pre>
+   * 是否必填：否
+   * </pre>
+   */
+  @SerializedName("print_type")
+  private Integer printType;
+
 
   public String toJson() {
     return WxMaGsonBuilder.create().toJson(this);
