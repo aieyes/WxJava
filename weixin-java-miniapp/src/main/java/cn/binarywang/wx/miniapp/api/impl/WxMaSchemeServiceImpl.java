@@ -2,6 +2,7 @@ package cn.binarywang.wx.miniapp.api.impl;
 
 import cn.binarywang.wx.miniapp.api.WxMaSchemeService;
 import cn.binarywang.wx.miniapp.api.WxMaService;
+import cn.binarywang.wx.miniapp.bean.scheme.WxMaGenerateNfcSchemeRequest;
 import cn.binarywang.wx.miniapp.bean.scheme.WxMaGenerateSchemeRequest;
 import com.google.gson.JsonObject;
 import lombok.AllArgsConstructor;
@@ -11,6 +12,7 @@ import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.util.json.GsonParser;
 
 import static cn.binarywang.wx.miniapp.constant.WxMaApiUrlConstants.Scheme.GENERATE_SCHEME_URL;
+import static cn.binarywang.wx.miniapp.constant.WxMaApiUrlConstants.Scheme.GENERATE_NFC_SCHEME_URL;
 
 /**
  * @author : cofedream
@@ -30,4 +32,15 @@ public class WxMaSchemeServiceImpl implements WxMaSchemeService {
     }
     return jsonObject.get("openlink").getAsString();
   }
+
+  @Override
+  public String generateNfc(WxMaGenerateNfcSchemeRequest request) throws WxErrorException {
+    String responseContent = this.wxMaService.post(GENERATE_NFC_SCHEME_URL, request.toJson());
+    JsonObject jsonObject = GsonParser.parse(responseContent);
+    if (jsonObject.get(ERR_CODE).getAsInt() != 0) {
+      throw new WxErrorException(WxError.fromJson(responseContent, WxType.MiniApp));
+    }
+    return jsonObject.get("openlink").getAsString();
+  }
+
 }

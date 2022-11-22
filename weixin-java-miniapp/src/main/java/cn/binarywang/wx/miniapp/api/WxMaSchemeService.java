@@ -1,5 +1,6 @@
 package cn.binarywang.wx.miniapp.api;
 
+import cn.binarywang.wx.miniapp.bean.scheme.WxMaGenerateNfcSchemeRequest;
 import cn.binarywang.wx.miniapp.bean.scheme.WxMaGenerateSchemeRequest;
 import me.chanjar.weixin.common.error.WxErrorException;
 
@@ -21,4 +22,13 @@ public interface WxMaSchemeService {
    * @throws WxErrorException 生成失败时抛出，具体错误码请看文档
    */
   String generate(WxMaGenerateSchemeRequest request) throws WxErrorException;
+
+  /**
+   * 获取小程序nfc scheme码
+   *
+   * @param request 请求参数
+   * @throws WxErrorException 生成失败时抛出，具体错误码请看文档
+   */
+  String generateNfc(WxMaGenerateNfcSchemeRequest request) throws WxErrorException;
+
 }
