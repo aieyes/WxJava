@@ -11,10 +11,10 @@ import java.util.List;
 
 /**
  * 审批信息
- *
+ * <p>
  * 审批申请状态变化回调通知
  * https://developer.work.weixin.qq.com/document/path/91815
- *
+ * <p>
  * 自建应用审批状态变化通知回调
  * https://developer.work.weixin.qq.com/document/path/90269
  *
@@ -447,13 +447,13 @@ public class WxCpXmlApprovalInfo implements Serializable {
     /**
      * 备注意见附件，值是附件media_id
      */
-    @XStreamImplicit(itemFieldName="Attach")
+    @XStreamImplicit(itemFieldName = "Attach")
     private List<String> attach;
   }
 
   @Data
   @XStreamAlias("CommentUserInfo")
-  private static class CommentUserInfo implements Serializable {
+  public static class CommentUserInfo implements Serializable {
     private static final long serialVersionUID = 5031739716823000947L;
 
     /**

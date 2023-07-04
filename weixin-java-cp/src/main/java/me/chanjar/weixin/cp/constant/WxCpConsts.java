@@ -168,7 +168,65 @@ public class WxCpConsts {
   @UtilityClass
   public static class MsgAuditChangeType {
 
+    /**
+     * The constant MSG_AUDIT_APPROVED.
+     */
     public static final String MSG_AUDIT_APPROVED = "msg_audit_approved";
+
+  }
+
+  /**
+   * 会话存档媒体类型
+   * https://developer.work.weixin.qq.com/document/path/91774
+   */
+  @UtilityClass
+  public static class MsgAuditMediaType {
+
+    /**
+     * 图片
+     */
+    public static final String IMAGE = "image";
+
+    /**
+     * 语音
+     */
+    public static final String VOICE = "voice";
+
+    /**
+     * 视频
+     */
+    public static final String VIDEO = "video";
+
+    /**
+     * 表情
+     */
+    public static final String EMOTION = "emotion";
+
+    /**
+     * 文件
+     */
+    public static final String FILE = "file";
+
+    /**
+     * 音频存档消息
+     */
+    public static final String MEETING_VOICE_CALL = "meeting_voice_call";
+
+    /**
+     * 音频共享文档消息
+     */
+    public static final String VOIP_DOC_SHARE = "voip_doc_share";
+
+    @UtilityClass
+    public static class MsgAuditSuffix {
+
+      public static final String JPG = ".jpg";
+      public static final String PNG = ".png";
+      public static final String GIF = ".gif";
+      public static final String MP4 = ".mp4";
+      public static final String AMR = ".amr";
+
+    }
 
   }
 
@@ -183,7 +241,13 @@ public class WxCpConsts {
      * https://developer.work.weixin.qq.com/document/path/92052
      */
     public static final String CREATE_DEPARTMENT = "create_department";
+    /**
+     * The constant UPDATE_DEPARTMENT.
+     */
     public static final String UPDATE_DEPARTMENT = "update_department";
+    /**
+     * The constant DELETE_DEPARTMENT.
+     */
     public static final String DELETE_DEPARTMENT = "delete_department";
 
     /**
@@ -191,12 +255,33 @@ public class WxCpConsts {
      * https://developer.work.weixin.qq.com/document/path/92032
      */
     public static final String CREATE_STUDENT = "create_student";
+    /**
+     * The constant UPDATE_STUDENT.
+     */
     public static final String UPDATE_STUDENT = "update_student";
+    /**
+     * The constant DELETE_STUDENT.
+     */
     public static final String DELETE_STUDENT = "delete_student";
+    /**
+     * The constant CREATE_PARENT.
+     */
     public static final String CREATE_PARENT = "create_parent";
+    /**
+     * The constant UPDATE_PARENT.
+     */
     public static final String UPDATE_PARENT = "update_parent";
+    /**
+     * The constant DELETE_PARENT.
+     */
     public static final String DELETE_PARENT = "delete_parent";
+    /**
+     * The constant SUBSCRIBE.
+     */
     public static final String SUBSCRIBE = "subscribe";
+    /**
+     * The constant UNSUBSCRIBE.
+     */
     public static final String UNSUBSCRIBE = "unsubscribe";
 
   }
@@ -232,6 +317,9 @@ public class WxCpConsts {
      */
     public static final String TRANSFER_FAIL = "transfer_fail";
 
+    /**
+     * The type External contact transfer fail reason.
+     */
     @UtilityClass
     public static class ExternalContactTransferFailReason {
       /**
@@ -245,6 +333,9 @@ public class WxCpConsts {
     }
   }
 
+  /**
+   * The type External chat change type.
+   */
   @UtilityClass
   public static class ExternalChatChangeType {
     /**
@@ -260,6 +351,9 @@ public class WxCpConsts {
      */
     public static final String DISMISS = "dismiss";
 
+    /**
+     * The type External chat update detail.
+     */
     @UtilityClass
     public static class ExternalChatUpdateDetail {
       /**
@@ -285,6 +379,9 @@ public class WxCpConsts {
     }
   }
 
+  /**
+   * The type External tag change type.
+   */
   @UtilityClass
   public static class ExternalTagChangeType {
 
@@ -306,6 +403,9 @@ public class WxCpConsts {
     public static final String SHUFFLE = "shuffle";
   }
 
+  /**
+   * The type Tage type.
+   */
   @UtilityClass
   public static class TageType {
     /**
@@ -436,6 +536,11 @@ public class WxCpConsts {
      */
     public static final String FILE = "file";
 
+    /**
+     * 模版类型消息.
+     */
+    public static final String TEMPLATE_CARD = "template_card";
+
   }
 
   /**
@@ -481,26 +586,44 @@ public class WxCpConsts {
     public static final String MARKDOWN = "markdown";
   }
 
+  /**
+   * The type Work bench type.
+   */
   @UtilityClass
   public static class WorkBenchType {
+    /**
+     * The constant KEYDATA.
+     */
     /*
      * 关键数据型
      * */
     public static final String KEYDATA = "keydata";
+    /**
+     * The constant IMAGE.
+     */
     /*
      * 图片型
      * */
     public static final String IMAGE = "image";
+    /**
+     * The constant LIST.
+     */
     /*
      * 列表型
      * */
     public static final String LIST = "list";
+    /**
+     * The constant WEBVIEW.
+     */
     /*
      * webview型
      * */
     public static final String WEBVIEW = "webview";
   }
 
+  /**
+   * The type Welcome msg type.
+   */
   @UtilityClass
   public static class WelcomeMsgType {
     /**
@@ -526,6 +649,9 @@ public class WxCpConsts {
     public static final String FILE = "file";
   }
 
+  /**
+   * The type Product attachment type.
+   */
   @UtilityClass
   public static class ProductAttachmentType {
 

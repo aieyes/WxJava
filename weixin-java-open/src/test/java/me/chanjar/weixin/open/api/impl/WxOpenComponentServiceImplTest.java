@@ -3,6 +3,7 @@ package me.chanjar.weixin.open.api.impl;
 import com.google.inject.Inject;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.open.api.WxOpenComponentService;
+import me.chanjar.weixin.open.bean.result.WxOpenHaveResult;
 import me.chanjar.weixin.open.bean.result.WxOpenResult;
 import me.chanjar.weixin.open.bean.tcb.ShareCloudBaseEnvRequest;
 import me.chanjar.weixin.open.bean.tcb.ShareCloudBaseEnvResponse;
@@ -19,7 +20,7 @@ import java.util.Arrays;
  * 单元测试类.
  *
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
- * @date 2020-06-06
+ * created on  2020-06-06
  */
 @Guice(modules = ApiTestModule.class)
 public class WxOpenComponentServiceImplTest {
@@ -166,6 +167,11 @@ public class WxOpenComponentServiceImplTest {
   @Test
   public void testGetOpenAccount() {
   }
+  @Test
+  public void testHaveOpen() throws WxErrorException {
+    WxOpenHaveResult wxOpenHaveResult = wxOpenComponentService.haveOpen();
+    Assert.assertNotNull(wxOpenHaveResult);
+  }
 
   @Test
   public void testFastRegisterWeapp() {
@@ -206,5 +212,12 @@ public class WxOpenComponentServiceImplTest {
       .build();
     ShareCloudBaseEnvResponse response = wxOpenComponentService.shareCloudBaseEnv(request);
     Assert.assertNotNull(response);
+  }
+
+
+  @Test
+  public void testClearQuotaV2() throws WxErrorException {
+    WxOpenResult wxOpenResult = wxOpenComponentService.clearQuotaV2("");
+    Assert.assertNotNull(wxOpenResult);
   }
 }

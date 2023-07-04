@@ -17,8 +17,7 @@ import static me.chanjar.weixin.cp.constant.WxCpConsts.GroupRobotMsgType;
 /**
  * 企业微信群机器人消息发送api 实现
  *
- * @author yr
- * @date 2020-08-20
+ * @author yr  created on  2020-08-20
  */
 @RequiredArgsConstructor
 public class WxCpGroupRobotServiceImpl implements WxCpGroupRobotService {
@@ -91,6 +90,11 @@ public class WxCpGroupRobotServiceImpl implements WxCpGroupRobotService {
     this.cpService.postWithoutToken(webhookUrl, new WxCpGroupRobotMessage()
       .setMsgType(GroupRobotMsgType.FILE)
       .setMediaId(mediaId).toJson());
+  }
+
+  @Override
+  public void sendTemplateCardMessage(String webhookUrl, WxCpGroupRobotMessage wxCpGroupRobotMessage) throws WxErrorException {
+    this.cpService.postWithoutToken(webhookUrl, wxCpGroupRobotMessage.toJson());
   }
 
 }

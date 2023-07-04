@@ -11,6 +11,7 @@ import me.chanjar.weixin.common.util.json.GsonParser;
 import me.chanjar.weixin.cp.api.WxCpService;
 import me.chanjar.weixin.cp.api.WxCpUserService;
 import me.chanjar.weixin.cp.bean.WxCpInviteResult;
+import me.chanjar.weixin.cp.bean.WxCpOpenUseridToUseridResult;
 import me.chanjar.weixin.cp.bean.WxCpUser;
 import me.chanjar.weixin.cp.bean.WxCpUseridToOpenUseridResult;
 import me.chanjar.weixin.cp.bean.external.contact.WxCpExternalContactInfo;
@@ -203,6 +204,17 @@ public class WxCpUserServiceImpl implements WxCpUserService {
   }
 
   @Override
+  public String getUserIdByEmail(String email, int emailType) throws WxErrorException {
+    JsonObject jsonObject = new JsonObject();
+    jsonObject.addProperty("email", email);
+    jsonObject.addProperty("email_type", emailType);
+    String url = this.mainService.getWxCpConfigStorage().getApiUrl(GET_USER_ID_BY_EMAIL);
+    String responseContent = this.mainService.post(url, jsonObject.toString());
+    JsonObject tmpJson = GsonParser.parse(responseContent);
+    return tmpJson.get("userid").getAsString();
+  }
+
+  @Override
   public WxCpExternalContactInfo getExternalContact(String userId) throws WxErrorException {
     String url = this.mainService.getWxCpConfigStorage().getApiUrl(GET_EXTERNAL_CONTACT + userId);
     String responseContent = this.mainService.get(url, null);
@@ -238,6 +250,20 @@ public class WxCpUserServiceImpl implements WxCpUserService {
     String url = this.mainService.getWxCpConfigStorage().getApiUrl(USERID_TO_OPEN_USERID);
     String responseContent = this.mainService.post(url, jsonObject.toString());
     return WxCpUseridToOpenUseridResult.fromJson(responseContent);
+  }
+
+  @Override
+  public WxCpOpenUseridToUseridResult openUseridToUserid(List<String> openUseridList, String sourceAgentId) throws WxErrorException {
+    JsonObject jsonObject = new JsonObject();
+    JsonArray jsonArray = new JsonArray();
+    for (String openUserid : openUseridList) {
+      jsonArray.add(openUserid);
+    }
+    jsonObject.add("open_userid_list", jsonArray);
+    jsonObject.addProperty("source_agentid", sourceAgentId);
+    String url = this.mainService.getWxCpConfigStorage().getApiUrl(OPEN_USERID_TO_USERID);
+    String responseContent = this.mainService.post(url, jsonObject.toString());
+    return WxCpOpenUseridToUseridResult.fromJson(responseContent);
   }
 
   @Override

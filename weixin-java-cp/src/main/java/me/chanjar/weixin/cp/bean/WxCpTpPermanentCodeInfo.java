@@ -45,7 +45,7 @@ public class WxCpTpPermanentCodeInfo extends WxCpBaseResp {
    */
   @SerializedName("auth_user_info")
   private AuthUserInfo authUserInfo;
-  
+
   /**
    * 推广二维码安装相关信息
    */
@@ -58,6 +58,18 @@ public class WxCpTpPermanentCodeInfo extends WxCpBaseResp {
   @SerializedName("edition_info")
   private EditionInfo editionInfo;
 
+  /**
+   * 安装应用时，扫码或者授权链接中带的state值。详见state说明
+   * state说明：
+   * 目前会返回state包含以下几个场景。
+   * （1）扫带参二维码授权代开发模版。
+   */
+  @SerializedName("state")
+  private String state;
+
+  /**
+   * The type Auth corp info.
+   */
   @Getter
   @Setter
   public static class AuthCorpInfo implements Serializable {
@@ -154,6 +166,9 @@ public class WxCpTpPermanentCodeInfo extends WxCpBaseResp {
 
   }
 
+  /**
+   * The type Agent.
+   */
   @Getter
   @Setter
   public static class Agent implements Serializable {
@@ -284,7 +299,7 @@ public class WxCpTpPermanentCodeInfo extends WxCpBaseResp {
     @SerializedName("open_userid")
     private String openUserid;
   }
-  
+
   /**
    * 推广二维码安装相关信息
    */
@@ -353,6 +368,12 @@ public class WxCpTpPermanentCodeInfo extends WxCpBaseResp {
 
   }
 
+  /**
+   * From json wx cp tp permanent code info.
+   *
+   * @param json the json
+   * @return the wx cp tp permanent code info
+   */
   public static WxCpTpPermanentCodeInfo fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpTpPermanentCodeInfo.class);
   }

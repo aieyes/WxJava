@@ -2,6 +2,7 @@ package me.chanjar.weixin.cp.api;
 
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.cp.bean.WxCpInviteResult;
+import me.chanjar.weixin.cp.bean.WxCpOpenUseridToUseridResult;
 import me.chanjar.weixin.cp.bean.WxCpUser;
 import me.chanjar.weixin.cp.bean.WxCpUseridToOpenUseridResult;
 import me.chanjar.weixin.cp.bean.external.contact.WxCpExternalContactInfo;
@@ -132,7 +133,8 @@ public interface WxCpUserService {
    *
    * @param userId  企业内的成员id
    * @param agentId 非必填，整型，仅用于发红包。其它场景该参数不要填，如微信支付、企业转账、电子发票
-   * @return map对象 ，可能包含以下值： - openid 企业微信成员userid对应的openid，若有传参agentid，则是针对该agentid的openid。否则是针对企业微信corpid的openid - appid 应用的appid，若请求包中不包含agentid则不返回appid。该appid在使用微信红包时会用到
+   * @return map对象 ，可能包含以下值： - openid 企业微信成员userid对应的openid，若有传参agentid，则是针对该agentid的openid。否则是针对企业微信corpid的openid -
+   * appid 应用的appid，若请求包中不包含agentid则不返回appid。该appid在使用微信红包时会用到
    * @throws WxErrorException the wx error exception
    */
   Map<String, String> userId2Openid(String userId, Integer agentId) throws WxErrorException;
@@ -171,6 +173,23 @@ public interface WxCpUserService {
    * @throws WxErrorException .
    */
   String getUserId(String mobile) throws WxErrorException;
+
+  /**
+   * <pre>
+   *
+   * 通过邮箱获取其所对应的userid。
+   *
+   * 请求方式：POST（HTTPS）
+   * 请求地址：https://qyapi.weixin.qq.com/cgi-bin/user/get_userid_by_email?access_token=ACCESS_TOKEN
+   *
+   * 文档地址：https://developer.work.weixin.qq.com/document/path/95895
+   * </pre>
+   *
+   * @param email 手机号码。长度为5~32个字节
+   * @return userid email对应的成员userid
+   * @throws WxErrorException .
+   */
+  String getUserIdByEmail(String email,int emailType) throws WxErrorException;
 
   /**
    * 获取外部联系人详情.
@@ -226,11 +245,29 @@ public interface WxCpUserService {
    * 将自建应用或代开发应用获取的userid转换为第三方应用的userid
    * https://developer.work.weixin.qq.com/document/path/95603
    *
-   * @param useridList
+   * @param useridList the userid list
    * @return the WxCpUseridToOpenUseridResult
-   * @throws WxErrorException
+   * @throws WxErrorException the wx error exception
    */
   WxCpUseridToOpenUseridResult useridToOpenUserid(ArrayList<String> useridList) throws WxErrorException;
+
+  /**
+   * open_userid转换为userid
+   * 将代开发应用或第三方应用获取的密文open_userid转换为明文userid
+   * <pre>
+   * 文档地址：<a href="https://developer.work.weixin.qq.com/document/path/95884#userid%E8%BD%AC%E6%8D%A2">https://developer.work.weixin.qq.com/document/path/95884#userid%E8%BD%AC%E6%8D%A2</a>
+   *
+   * 权限说明：
+   *
+   * 需要使用自建应用或基础应用的access_token
+   * 成员需要同时在access_token和source_agentid所对应应用的可见范围内
+   * </pre>
+   * @param openUseridList open_userid列表，最多不超过1000个。必须是source_agentid对应的应用所获取
+   * @param sourceAgentId 企业授权的代开发自建应用或第三方应用的agentid
+   * @return the WxCpOpenUseridToUseridResult
+   * @throws WxErrorException the wx error exception
+   */
+  WxCpOpenUseridToUseridResult openUseridToUserid(List<String> openUseridList, String sourceAgentId) throws WxErrorException;
 
   /**
    * 获取成员ID列表
@@ -239,10 +276,10 @@ public interface WxCpUserService {
    * 请求方式：POST（HTTPS）
    * 请求地址：https://qyapi.weixin.qq.com/cgi-bin/user/list_id?access_token=ACCESS_TOKEN
    *
-   * @param cursor
-   * @param limit
-   * @return
-   * @throws WxErrorException
+   * @param cursor the cursor
+   * @param limit  the limit
+   * @return user list id
+   * @throws WxErrorException the wx error exception
    */
   WxCpDeptUserResult getUserListId(String cursor, Integer limit) throws WxErrorException;
 

@@ -21,7 +21,7 @@ import java.util.Map;
 
 /**
  * @author chenliang
- * @date 2021-08-02 5:09 下午
+ * created on  2021-08-02 5:09 下午
  *
  * <pre>
  *   微信代扣扣款回调结果
@@ -61,6 +61,13 @@ public class WxWithholdNotifyResult extends BaseWxPayResult {
    */
   @XStreamAlias("is_subscribe")
   private String isSubscribe;
+
+  /**
+   * 是否关注子商户关联的公众号
+   * 非必传
+   */
+  @XStreamAlias("sub_is_subscribe")
+  private String subIsSubscribe;
 
   /**
    * 付款银行
@@ -191,6 +198,7 @@ public class WxWithholdNotifyResult extends BaseWxPayResult {
     deviceInfo = readXmlString(d, "device_info");
     openId = readXmlString(d, "openid");
     isSubscribe = readXmlString(d, "is_subscribe");
+    subIsSubscribe = readXmlString(d, "sub_is_subscribe");
     subOpenId = readXmlString(d, "sub_openid");
     bankType = readXmlString(d, "bank_type");
     totalFee = readXmlInteger(d, "total_fee");
