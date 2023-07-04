@@ -12,8 +12,7 @@ import java.io.Serializable;
 /**
  * 二级标题+文本列表，该字段可为空数组，但有数据的话需确认对应字段是否必填，列表长度不超过6
  *
- * @author yzts
- * @date 2021/9/22
+ * @author yzts  created on  2021/9/22
  */
 @Data
 @Builder
@@ -44,6 +43,16 @@ public class HorizontalContent implements Serializable {
    */
   private String media_id;
 
+  /**
+   * 成员详情的userid，horizontal_content_list.type是3时必填
+   */
+  private String userid;
+
+  /**
+   * To json json object.
+   *
+   * @return the json object
+   */
   public JsonObject toJson() {
     JsonObject hContentJson = new JsonObject();
 
@@ -60,6 +69,9 @@ public class HorizontalContent implements Serializable {
     }
     if (StringUtils.isNotBlank(this.getMedia_id())) {
       hContentJson.addProperty("media_id", this.getMedia_id());
+    }
+    if (StringUtils.isNotBlank(this.getUserid())) {
+      hContentJson.addProperty("userid", this.getUserid());
     }
     return hContentJson;
   }

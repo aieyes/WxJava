@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 /**
  * @author chenliang
- * @date 2021-08-02 5:39 下午
+ * created on  2021-08-02 5:39 下午
  *
  * <pre>
  *   委托扣款返回值
@@ -20,6 +20,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@XStreamAlias("xml")
 public class WxWithholdResult extends BaseWxPayResult implements Serializable {
 
   private static final long serialVersionUID = 1L;

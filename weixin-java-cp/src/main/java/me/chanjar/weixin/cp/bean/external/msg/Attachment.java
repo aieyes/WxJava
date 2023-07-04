@@ -7,6 +7,8 @@ import me.chanjar.weixin.cp.constant.WxCpConsts;
 import java.io.Serializable;
 
 /**
+ * The type Attachment.
+ *
  * @author chutian0124
  */
 @Data
@@ -27,28 +29,58 @@ public class Attachment implements Serializable {
 
   private File file;
 
-  public void setImage(Image image) {
+  /**
+   * Sets image.
+   *
+   * @param image the image
+   */
+  public Attachment setImage(Image image) {
     this.image = image;
     this.msgType = WxCpConsts.WelcomeMsgType.IMAGE;
+    return this;
   }
 
-  public void setLink(Link link) {
+  /**
+   * Sets link.
+   *
+   * @param link the link
+   */
+  public Attachment setLink(Link link) {
     this.link = link;
     this.msgType = WxCpConsts.WelcomeMsgType.LINK;
+    return this;
   }
 
-  public void setMiniProgram(MiniProgram miniProgram) {
+  /**
+   * Sets mini program.
+   *
+   * @param miniProgram the mini program
+   */
+  public Attachment setMiniProgram(MiniProgram miniProgram) {
     this.miniProgram = miniProgram;
     this.msgType = WxCpConsts.WelcomeMsgType.MINIPROGRAM;
+    return this;
   }
 
-  public void setVideo(Video video) {
+  /**
+   * Sets video.
+   *
+   * @param video the video
+   */
+  public Attachment setVideo(Video video) {
     this.video = video;
     this.msgType = WxCpConsts.WelcomeMsgType.VIDEO;
+    return this;
   }
 
-  public void setFile(File file) {
+  /**
+   * Sets file.
+   *
+   * @param file the file
+   */
+  public Attachment setFile(File file) {
     this.file = file;
     this.msgType = WxCpConsts.WelcomeMsgType.FILE;
+    return this;
   }
 }

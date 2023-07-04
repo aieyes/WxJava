@@ -4,6 +4,7 @@ import cn.binarywang.wx.miniapp.api.*;
 import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
 import cn.binarywang.wx.miniapp.config.WxMaConfig;
 import cn.binarywang.wx.miniapp.util.WxMaConfigHolder;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
@@ -80,6 +81,11 @@ public abstract class BaseWxMaServiceImpl<H, P> implements WxMaService, RequestH
   private final WxMaMarketingService marketingService = new WxMaMarketingServiceImpl(this);
   private final WxMaImmediateDeliveryService immediateDeliveryService = new WxMaImmediateDeliveryServiceImpl(this);
   private final WxMaSafetyRiskControlService safetyRiskControlService = new WxMaSafetyRiskControlServiceImpl(this);
+  private final WxMaShopSharerService shopSharerService = new WxMaShopSharerServiceImpl(this);
+  private final WxMaProductService productService = new WxMaProductServiceImpl(this);
+  private final WxMaProductOrderService productOrderService = new WxMaProductOrderServiceImpl(this);
+  private final WxMaShopCouponService wxMaShopCouponService = new WxMaShopCouponServiceImpl(this);
+  private final WxMaShopPayService wxMaShopPayService = new WxMaShopPayServiceImpl(this);
   private Map<String, WxMaConfig> configMap;
   private int retrySleepMillis = 1000;
   private int maxRetryTimes = 5;
@@ -170,7 +176,13 @@ public abstract class BaseWxMaServiceImpl<H, P> implements WxMaService, RequestH
           return this.getWxMaConfig().getAccessToken();
         }
       } while (!locked);
-      String response = doGetAccessTokenRequest();
+
+      String response;
+      if (getWxMaConfig().isStableAccessToken()) {
+        response = doGetStableAccessTokenRequest(forceRefresh);
+      } else {
+        response = doGetAccessTokenRequest();
+      }
       return extractAccessToken(response);
     } catch (IOException | InterruptedException e) {
       throw new WxRuntimeException(e);
@@ -188,6 +200,15 @@ public abstract class BaseWxMaServiceImpl<H, P> implements WxMaService, RequestH
    * @throws IOException .
    */
   protected abstract String doGetAccessTokenRequest() throws IOException;
+
+
+  /**
+   * 通过网络请求获取稳定版接口调用凭据
+   *
+   * @return .
+   * @throws IOException .
+   */
+  protected abstract String doGetStableAccessTokenRequest(boolean forceRefresh) throws IOException;
 
   @Override
   public String get(String url, String queryParam) throws WxErrorException {
@@ -295,12 +316,12 @@ public abstract class BaseWxMaServiceImpl<H, P> implements WxMaService, RequestH
       }
 
       if (error.getErrorCode() != 0) {
-        log.error("\n【请求地址】: {}\n【请求参数】：{}\n【错误信息】：{}", uriWithAccessToken, dataForLog, error);
+        log.warn("\n【请求地址】: {}\n【请求参数】：{}\n【错误信息】：{}", uriWithAccessToken, dataForLog, error);
         throw new WxErrorException(error, e);
       }
       return null;
     } catch (IOException e) {
-      log.error("\n【请求地址】: {}\n【请求参数】：{}\n【异常信息】：{}", uriWithAccessToken, dataForLog, e.getMessage());
+      log.warn("\n【请求地址】: {}\n【请求参数】：{}\n【异常信息】：{}", uriWithAccessToken, dataForLog, e.getMessage());
       throw new WxRuntimeException(e);
     }
   }
@@ -320,7 +341,7 @@ public abstract class BaseWxMaServiceImpl<H, P> implements WxMaService, RequestH
       throw new WxErrorException(error);
     }
     WxAccessToken accessToken = WxAccessToken.fromJson(resultContent);
-    config.updateAccessToken(accessToken.getAccessToken(), accessToken.getExpiresIn());
+    config.updateAccessTokenProcessor(accessToken.getAccessToken(), accessToken.getExpiresIn());
     return accessToken.getAccessToken();
   }
 
@@ -346,6 +367,7 @@ public abstract class BaseWxMaServiceImpl<H, P> implements WxMaService, RequestH
   }
 
   @Override
+  @JsonDeserialize
   public void setMultiConfigs(Map<String, WxMaConfig> configs, String defaultMiniappId) {
     this.configMap = Maps.newHashMap(configs);
     WxMaConfigHolder.set(defaultMiniappId);
@@ -598,4 +620,24 @@ public abstract class BaseWxMaServiceImpl<H, P> implements WxMaService, RequestH
   @Override
   public WxMaSafetyRiskControlService getSafetyRiskControlService(){ return this.safetyRiskControlService; }
 
+  @Override
+  public WxMaShopSharerService getShopSharerService() {return this.shopSharerService; }
+
+  @Override
+  public WxMaProductService getProductService() { return this.productService; }
+
+  @Override
+  public WxMaProductOrderService getProductOrderService() {
+    return this.productOrderService;
+  }
+
+  @Override
+  public WxMaShopCouponService getWxMaShopCouponService() {
+    return this.wxMaShopCouponService;
+  }
+
+  @Override
+  public WxMaShopPayService getWxMaShopPayService() {
+    return this.wxMaShopPayService;
+  }
 }

@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 
 /**
  * @author chenliang
- * @date 2021-08-02 6:45 下午
+ * created on  2021-08-02 6:45 下午
  */
 @Test
 @Guice(modules = ApiTestModule.class)
@@ -172,6 +172,31 @@ public class WxEntrustPapServiceTest {
     try {
       WxWithholdResult wxWithholdResult = this.payService.getWxEntrustPapService().withhold(withholdRequest);
       logger.info(wxWithholdResult.toString());
+    } catch (WxPayException e) {
+      e.printStackTrace();
+    }
+  }
+
+  @Test
+  public void testWithholdPartner() {
+    String outTradeNo = "101010101";
+    WxWithholdRequest withholdRequest = WxWithholdRequest.newBuilder()
+      .attach("local")
+      .body("产品名字")
+      .contractId("202011065409471222") //  微信返回的签约协议号
+      .detail("产品描述")
+      .feeType("CNY")
+      //.goodsTag()
+      .notifyUrl("http://domain.com/api/wxpay/withhold/callback.do")
+      .outTradeNo(outTradeNo)
+      .spbillCreateIp("127.0.0.1")
+      .totalFee(1)
+      .tradeType("PAP")
+      .build();
+
+    try {
+      WxPayCommonResult wxPayCommonResult = this.payService.getWxEntrustPapService().withholdPartner(withholdRequest);
+      logger.info(wxPayCommonResult.toString());
     } catch (WxPayException e) {
       e.printStackTrace();
     }

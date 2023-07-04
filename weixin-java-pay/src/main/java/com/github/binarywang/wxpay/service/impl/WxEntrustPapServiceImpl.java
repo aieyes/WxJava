@@ -15,7 +15,7 @@ import java.net.URLEncoder;
 
 /**
  * @author chenliang
- * @date 2021-08-02 4:53 下午
+ * created on  2021-08-02 4:53 下午
  */
 @Slf4j
 @RequiredArgsConstructor
@@ -48,6 +48,8 @@ public class WxEntrustPapServiceImpl implements WxEntrustPapService {
   @Override
   public WxH5EntrustResult h5Sign(WxH5EntrustRequest wxH5EntrustRequest) throws WxPayException {
     wxH5EntrustRequest.checkAndSign(payService.getConfig());
+    // 微信最新接口signType不能参与签名，否则报错：签约参数签名校验错误
+    wxH5EntrustRequest.setSignType(null);
 
     String sign = SignUtils.createSign(wxH5EntrustRequest, WxPayConstants.SignType.HMAC_SHA256, payService.getConfig().getMchKey(), null);
     /**
@@ -95,6 +97,16 @@ public class WxEntrustPapServiceImpl implements WxEntrustPapService {
     String url = payService.getPayBaseUrl() + "/pay/pappayapply";
     String responseContent = payService.post(url, wxWithholdRequest.toXML(), false);
     WxWithholdResult result = BaseWxPayResult.fromXML(responseContent, WxWithholdResult.class);
+    result.checkResult(payService, wxWithholdRequest.getSignType(), true);
+    return result;
+  }
+
+  @Override
+  public WxPayCommonResult withholdPartner(WxWithholdRequest wxWithholdRequest) throws WxPayException {
+    wxWithholdRequest.checkAndSign(payService.getConfig());
+    String url = payService.getPayBaseUrl() + "/pay/partner/pappayapply";
+    String responseContent = payService.post(url, wxWithholdRequest.toXML(), false);
+    WxPayCommonResult result = BaseWxPayResult.fromXML(responseContent, WxPayCommonResult.class);
     result.checkResult(payService, wxWithholdRequest.getSignType(), true);
     return result;
   }

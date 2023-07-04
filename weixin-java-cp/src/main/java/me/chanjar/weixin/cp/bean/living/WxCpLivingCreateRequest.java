@@ -1,20 +1,17 @@
 package me.chanjar.weixin.cp.bean.living;
 
 import com.google.gson.annotations.SerializedName;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.Accessors;
 import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 创建预约直播请求.
  *
- * @author Wang_Wong
- * @date 2021-12-23
+ * @author Wang_Wong  created on  2021-12-23
  */
 @Data
 @Builder
@@ -57,28 +54,55 @@ public class WxCpLivingCreateRequest implements Serializable {
   @SerializedName("activity_detail")
   private ActivityDetail activityDetail;
 
+  /**
+   * The type Activity detail.
+   */
+  @Getter
+  @Setter
   public static class ActivityDetail implements Serializable {
 
     @SerializedName("image_list")
-    private String[] imageList;
+    private List<String> imageList;
 
     @SerializedName("description")
     private String description;
 
+    /**
+     * From json activity detail.
+     *
+     * @param json the json
+     * @return the activity detail
+     */
     public static ActivityDetail fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, ActivityDetail.class);
     }
 
+    /**
+     * To json string.
+     *
+     * @return the string
+     */
     public String toJson() {
       return WxCpGsonBuilder.create().toJson(this);
     }
 
   }
 
+  /**
+   * From json wx cp living create request.
+   *
+   * @param json the json
+   * @return the wx cp living create request
+   */
   public static WxCpLivingCreateRequest fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpLivingCreateRequest.class);
   }
 
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     return WxCpGsonBuilder.create().toJson(this);
   }

@@ -14,7 +14,7 @@ import java.util.concurrent.locks.Lock;
  * 基于Redisson的实现
  *
  * @author yuanqixun
- * @date 2020/5/3
+ * created on  2020/5/3
  */
 public class WxMaRedissonConfigImpl extends WxMaDefaultConfigImpl {
 
@@ -91,7 +91,7 @@ public class WxMaRedissonConfigImpl extends WxMaDefaultConfigImpl {
 
   @Override
   public void updateAccessToken(WxAccessToken accessToken) {
-    redisOps.setValue(this.accessTokenKey, accessToken.getAccessToken(), accessToken.getExpiresIn(), TimeUnit.SECONDS);
+    updateAccessToken(accessToken.getAccessToken(), accessToken.getExpiresIn());
   }
 
   @Override

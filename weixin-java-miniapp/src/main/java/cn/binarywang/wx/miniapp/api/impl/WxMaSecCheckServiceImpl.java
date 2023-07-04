@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.net.URL;
 
 import static cn.binarywang.wx.miniapp.constant.WxMaApiUrlConstants.SecCheck.*;
-import static cn.binarywang.wx.miniapp.constant.WxMaConstants.ERRCODE;
+import static me.chanjar.weixin.common.api.WxConsts.ERR_CODE;
 
 /**
  * <pre>
@@ -85,15 +85,15 @@ public class WxMaSecCheckServiceImpl implements WxMaSecCheckService {
   }
 
   @Override
-  public WxMaMediaAsyncCheckResult mediaCheckAsync(WxMaMediaSecCheckCheckRequest medisRequest) throws WxErrorException {
-    String response = this.service.post(MEDIA_CHECK_ASYNC_URL,medisRequest);
+  public WxMaMediaAsyncCheckResult mediaCheckAsync(WxMaMediaSecCheckCheckRequest request) throws WxErrorException {
+    String response = this.service.post(MEDIA_CHECK_ASYNC_URL, request);
     parseErrorResponse(response);
     return WxMaGsonBuilder.create().fromJson(response,WxMaMediaAsyncCheckResult.class);
   }
 
   private void parseErrorResponse(String response) throws WxErrorException {
     JsonObject jsonObject = GsonParser.parse(response);
-    if (jsonObject.get(ERRCODE).getAsInt() != 0) {
+    if (jsonObject.get(ERR_CODE).getAsInt() != 0) {
       throw new WxErrorException(WxError.fromJson(response, WxType.MiniApp));
     }
   }

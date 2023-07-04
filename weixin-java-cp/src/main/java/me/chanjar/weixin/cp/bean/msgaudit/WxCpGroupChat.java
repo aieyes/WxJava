@@ -33,9 +33,12 @@ public class WxCpGroupChat implements Serializable {
 
   private List<Member> members;
 
+  /**
+   * The type Member.
+   */
   @Getter
   @Setter
-  public class Member implements Serializable {
+  public static class Member implements Serializable {
     private static final long serialVersionUID = -5028321625140879571L;
 
     @SerializedName("memberid")
@@ -44,16 +47,33 @@ public class WxCpGroupChat implements Serializable {
     @SerializedName("jointime")
     private Long joinTime;
 
+    /**
+     * From json member.
+     *
+     * @param json the json
+     * @return the member
+     */
     public Member fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, Member.class);
     }
 
   }
 
+  /**
+   * From json wx cp group chat.
+   *
+   * @param json the json
+   * @return the wx cp group chat
+   */
   public static WxCpGroupChat fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpGroupChat.class);
   }
 
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     return WxCpGsonBuilder.create().toJson(this);
   }

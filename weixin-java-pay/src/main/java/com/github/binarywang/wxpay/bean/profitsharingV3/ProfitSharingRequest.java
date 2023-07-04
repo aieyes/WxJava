@@ -1,5 +1,6 @@
 package com.github.binarywang.wxpay.bean.profitsharingV3;
 
+import com.github.binarywang.wxpay.v3.SpecEncrypt;
 import com.google.gson.annotations.SerializedName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,7 +15,7 @@ import java.util.List;
  * 请求分账API请求实体
  *
  * @author pg
- * @date 2021-6-24
+ * created on  2021-6-24
  */
 @Data
 @Builder(builderMethodName = "newBuilder")
@@ -22,6 +23,16 @@ import java.util.List;
 @AllArgsConstructor
 public class ProfitSharingRequest implements Serializable {
   private static final long serialVersionUID = 3644929701624280800L;
+
+  /**
+   * <pre>
+   * 字段名：子商户号
+   * 是否必填：是
+   * 描述：微信支付分配的子商户号，即分账的出资商户号。
+   * </pre>
+   */
+  @SerializedName("sub_mchid")
+  private String subMchId;
 
   /**
    * <pre>
@@ -60,6 +71,7 @@ public class ProfitSharingRequest implements Serializable {
    * 描述：分账接收方列表，可以设置出资商户作为分账接受方，最多可有50个分账接收方
    * </pre>
    */
+  @SpecEncrypt
   @SerializedName("receivers")
   private List<ProfitSharingReceiver> receivers;
 

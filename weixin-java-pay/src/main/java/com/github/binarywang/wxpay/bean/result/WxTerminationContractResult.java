@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 /**
  * @author chenliang
- * @date 2021-08-02 5:41 下午
+ * created on  2021-08-02 5:41 下午
  *
  * <pre>
  *   主动解约返回值
@@ -20,6 +20,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@XStreamAlias("xml")
 public class WxTerminationContractResult extends BaseWxPayResult implements Serializable {
 
   private static final long serialVersionUID = 1L;
@@ -27,7 +28,7 @@ public class WxTerminationContractResult extends BaseWxPayResult implements Seri
   /**
    * 委托代扣协议ID
    */
-  @XStreamAlias("contractId")
+  @XStreamAlias("contract_id")
   private String contractId;
 
   /**

@@ -8,14 +8,16 @@ import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.util.xml.XStreamCDataConverter;
 
 /**
+ * The type Wx cp xml out event message.
+ *
  * @author eYoung
- * @description:
- * @date create at 2021/12/3 16:36
+ * created at 2021/12/3 16:36
  */
 @XStreamAlias("xml")
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class WxCpXmlOutEventMessage extends WxCpXmlOutMessage {
+  private static final long serialVersionUID = -692538307520295832L;
 
   @XStreamAlias("Event")
   @XStreamConverter(value = XStreamCDataConverter.class)
@@ -77,6 +79,9 @@ public class WxCpXmlOutEventMessage extends WxCpXmlOutMessage {
   @XStreamConverter(value = XStreamCDataConverter.class)
   private String id;
 
+  /**
+   * Instantiates a new Wx cp xml out event message.
+   */
   public WxCpXmlOutEventMessage() {
     this.msgType = WxConsts.XmlMsgType.EVENT;
   }

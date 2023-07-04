@@ -9,9 +9,13 @@ import me.chanjar.weixin.cp.bean.WxCpChat;
 import me.chanjar.weixin.cp.bean.WxCpDepart;
 import me.chanjar.weixin.cp.bean.WxCpTag;
 import me.chanjar.weixin.cp.bean.WxCpUser;
+import me.chanjar.weixin.cp.bean.kf.WxCpKfGetCorpStatisticResp;
+
 import java.util.Objects;
 
 /**
+ * The type Wx cp gson builder.
+ *
  * @author Daniel Qian
  */
 public class WxCpGsonBuilder {
@@ -27,8 +31,14 @@ public class WxCpGsonBuilder {
     INSTANCE.registerTypeAdapter(WxError.class, new WxErrorAdapter());
     INSTANCE.registerTypeAdapter(WxMenu.class, new WxCpMenuGsonAdapter());
     INSTANCE.registerTypeAdapter(WxCpTag.class, new WxCpTagGsonAdapter());
+    INSTANCE.registerTypeAdapter(WxCpKfGetCorpStatisticResp.StatisticList.class, new StatisticListAdapter());
   }
 
+  /**
+   * Create gson.
+   *
+   * @return the gson
+   */
   public static Gson create() {
     if (Objects.isNull(GSON_INSTANCE)) {
       synchronized (INSTANCE) {
